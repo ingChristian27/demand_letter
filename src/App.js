@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
@@ -12,6 +12,85 @@ import "suneditor/dist/css/suneditor.min.css";
 import { generatePdf, savePdf } from "./services/service.pdf";
 import Parser from "html-react-parser";
 import LinearProgress from "@material-ui/core/LinearProgress";
+import GitHubUserProfile from './components/profiles'
+import { Machine, assign } from 'xstate'
+import { useMachine } from '@xstate/react';
+
+
+function App()  {
+  
+
+
+  return <h1>Hola mundo </h1>
+}
+export default App;
+
+/*
+const GITHUB_URL = 'https://api.github.com/users'
+
+const fetchUser = username =>
+  fetch(`${GITHUB_URL}/${username}`)
+    .then(blob => blob.json())
+    .then(data => {
+      if (data.message) {
+        return
+      }
+      return data
+    })
+    .catch(console.log)
+
+const userProfileMachine = Machine({
+  id: 'userProfile',
+  initial: 'idle',
+  context: {
+    username: 'ingchristian27',
+    user: null,
+    error: null,
+  },
+  states: {
+    idle: {
+      on: {
+        FETCH: 'loading',
+      },
+    },
+    loading: {
+      invoke: {
+        id: 'getUser',
+        src: (context, event) => fetchUser(context.username),
+        onDone: {
+          target: 'success',
+          actions: assign({ user: (context, event) => event.data }),
+        },
+        onError: {
+          target: 'failure',
+          actions: assign({ error: (context, event) => event.data }),
+        },
+      },
+    },
+    success: {},
+    failure: {
+      on: {
+        RETRY: 'loading',
+      },
+    },
+  },
+})
+function App()  {
+  const [current, send] = useMachine(userProfileMachine)
+
+  useEffect(() => {
+    send('FETCH')
+  }, [send])
+
+  if (current.matches('loading') || current.matches('idle')) {
+    return <span>Loading...</span>
+  }
+
+  return <GitHubUserProfile user={current.context.user} />
+}
+export default App;
+*/
+/*
 
 function App() {
   const [letter, setLetter] = useState(defaultLetter.html);
@@ -126,3 +205,5 @@ const Letter = ({ letter, editLetter, downloadPdf }) => {
     </React.Fragment>
   );
 };
+
+*/
